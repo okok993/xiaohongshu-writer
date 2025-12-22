@@ -1,0 +1,11 @@
+checkpoint_dir: checkpoints
+epsilon_decay_step: 20000
+epsilon_end: 0.0
+epsilon_start: 0.1
+eval_interval: 1000
+eval_step_size: 250
+eval_window_size: 500
+learning_rate: 0.1
+patience: 10
+save_checkpoints: true
+total_trials: 30000
