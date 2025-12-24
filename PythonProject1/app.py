@@ -133,13 +133,20 @@ init_session_state()
 
 # 在 init_session_state() 函数调用后添加回调函数
 # 定义回调函数
+# 替换原来的回调函数
 def set_topic_callback(topic_text):
-    """设置主题的回调函数"""
+    """设置主题的回调函数 - 修复版"""
     st.session_state.selected_topic = topic_text
     st.session_state.topic_updated = True
     st.session_state.temp_topic = topic_text
-    # 添加这一行来触发页面重新渲染
-    st.rerun()
+    # 移除 st.rerun()，使用另一种方式触发更新
+    st.session_state.trigger_rerun = True
+
+# 在合适的时机检查并执行 rerun
+if st.session_state.get("trigger_rerun", False):
+    st.session_state.trigger_rerun = False
+    # 使用 run_time 的 hack 方式重新运行
+    st.experimental_rerun()
 
 # 侧边栏 - 配置区域
 with st.sidebar:
